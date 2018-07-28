@@ -14,7 +14,6 @@ public class AnalyserModel {
 	
 	public AnalyserModel(String filePath) {		
 		wordMap = FileManager.loadProfanityFileIntoHashMap("swearWords.txt");
-		Debug.msg(wordMap.toString());
 		
 		// TODO turn the file text block into a listener action. 
 		try {
@@ -27,7 +26,7 @@ public class AnalyserModel {
 	}
 	
 	public void compareFileWithMap() {
-		// TODO Check if word file and swear word file have been correctly initialised. 
+		// TODO Check if word file and swear word file have been correctly initialised. Wait until GUI has been made. 
 		fileToArray();
 		
 		// Compare all words in array with the swear word hash map. 
@@ -41,13 +40,15 @@ public class AnalyserModel {
 	}
 	
 	private void fileToArray(){ // Transfers all words from a file into an array. 
+		final int LAST_WORD_PADDING_REMOVE_CONSTANT = 2;
+		String regexFindPunctuation = "[,.!?\\\\-]";
+		
 		wordArray = new ArrayList<String>();
 		
 		String tempString = "";
 		
-		// TODO Disregard punctuation inside of lyrics. 
 		for(int i = 0 ; i < fileText.length() ; i++) {
-			if(fileText.charAt(i) == ' ') {
+			if(fileText.charAt(i) == ' ' || Character.toString(fileText.charAt(i)).matches(regexFindPunctuation)) {
 				wordArray.add(tempString);
 				tempString = "";
 			}
@@ -55,6 +56,10 @@ public class AnalyserModel {
 				tempString = tempString + Character.toString(fileText.charAt(i)).toLowerCase();
 			}
 		}
+		
+		// For the last word in the for loop that does not get added to the array. 
+		tempString = tempString.substring(0, tempString.length() - LAST_WORD_PADDING_REMOVE_CONSTANT);
+		wordArray.add(tempString);
 		Debug.msg(wordArray.toString());
 	}
 }
