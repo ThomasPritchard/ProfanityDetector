@@ -32,8 +32,12 @@ public class AnalyserModel {
 		
 		// Compare all words in array with the swear word hash map. 
 		for(int i = 0 ; i < wordArray.size() ; i++) {
-			// TODO Finish for loop. 
+			if(wordMap.containsKey(wordArray.get(i))) {
+				Debug.msg("Swear word detected");
+				return;
+			}
 		}
+		Debug.msg("No swear word detected");
 	}
 	
 	private void fileToArray(){ // Transfers all words from a file into an array. 
