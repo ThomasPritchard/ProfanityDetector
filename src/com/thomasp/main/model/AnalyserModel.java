@@ -1,6 +1,5 @@
 package com.thomasp.main.model;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -12,31 +11,25 @@ public class AnalyserModel {
 	private LinkedHashMap<String, Boolean> wordMap;
 	private ArrayList<String> wordArray;
 	
-	public AnalyserModel(String filePath) {		
+	public AnalyserModel() {		
 		wordMap = FileManager.loadProfanityFileIntoHashMap("swearWords.txt");
-		
-		// TODO turn the file text block into a listener action. 
-		try {
-			fileText = FileManager.loadSongFileIntoString(filePath);
-		}catch(FileNotFoundException e){
-			Debug.error("File not found");
-		}
-		
-		Debug.msg(fileText);
 	}
 	
-	public void compareFileWithMap() {
+	public void setFileText(String fileText) {
+		this.fileText = fileText;
+	}
+	
+	public boolean compareFileWithMap() {
 		// TODO Check if word file and swear word file have been correctly initialised. Wait until GUI has been made. 
 		fileToArray();
 		
 		// Compare all words in array with the swear word hash map. 
 		for(int i = 0 ; i < wordArray.size() ; i++) {
 			if(wordMap.containsKey(wordArray.get(i))) {
-				Debug.msg("Swear word detected");
-				return;
+				return true;
 			}
-		}
-		Debug.msg("No swear word detected");
+		} 
+		return false;
 	}
 	
 	private void fileToArray(){ // Transfers all words from a file into an array. 

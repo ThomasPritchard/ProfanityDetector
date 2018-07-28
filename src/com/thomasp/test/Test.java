@@ -8,11 +8,10 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		AnalyserModel model = new AnalyserModel("songLyrics.txt"); // TODO Take away file name from constructor. 
+		AnalyserModel model = new AnalyserModel(); 
 		WindowView view = new WindowView(model);
-		AnalyserController controller = new AnalyserController(model, view);
+		AnalyserController controller = new AnalyserController(model, view, "songLyrics.txt"); // TODO Take away file name from constructor. 
 		
-		model.compareFileWithMap();
-
+		controller.startAnalysis();
 	}
 }
