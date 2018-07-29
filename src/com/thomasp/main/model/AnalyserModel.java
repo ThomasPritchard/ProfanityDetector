@@ -11,7 +11,7 @@ public class AnalyserModel {
 	private LinkedHashMap<String, Boolean> wordMap;
 	private ArrayList<String> wordArray;
 	
-	public AnalyserModel() {		
+	public AnalyserModel() {	
 		wordMap = FileManager.loadProfanityFileIntoHashMap("swearWords.txt"); // Loads pre-defined list of swear words. 
 	}
 	
@@ -22,7 +22,6 @@ public class AnalyserModel {
 	public boolean compareFileWithMap() {
 		// TODO Check if word file and swear word file have been correctly initialised. Wait until GUI has been made. 
 		fileToArray();
-		
 		// Compare all words in array with the swear word hash map. 
 		for(int i = 0 ; i < wordArray.size() ; i++) {
 			if(wordMap.containsKey(wordArray.get(i))) {
