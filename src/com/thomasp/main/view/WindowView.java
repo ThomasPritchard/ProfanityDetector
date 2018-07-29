@@ -12,7 +12,7 @@ public class WindowView {
 	}
 	
 	public void printDetected() {
-		Debug.msg("Swear word detected"); 
+		Debug.msg("Swear word detected"); // TODO Change to a view message. 
 	}
 	
 	public void printNotDetected() {

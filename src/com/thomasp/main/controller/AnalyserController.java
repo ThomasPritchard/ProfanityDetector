@@ -22,6 +22,7 @@ public class AnalyserController {
 			fileText = FileManager.loadSongFileIntoString(filePath);
 		}catch(FileNotFoundException e){
 			Debug.error("File not found"); 
+			System.exit(1);
 		}
 				
 		model.setFileText(fileText);

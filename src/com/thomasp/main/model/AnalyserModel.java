@@ -12,7 +12,7 @@ public class AnalyserModel {
 	private ArrayList<String> wordArray;
 	
 	public AnalyserModel() {		
-		wordMap = FileManager.loadProfanityFileIntoHashMap("swearWords.txt");
+		wordMap = FileManager.loadProfanityFileIntoHashMap("swearWords.txt"); // Loads pre-defined list of swear words. 
 	}
 	
 	public void setFileText(String fileText) {
