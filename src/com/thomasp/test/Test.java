@@ -19,6 +19,7 @@ public class Test extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		WindowView view = new WindowView(model, primaryStage);
-		AnalyserController controller = new AnalyserController(model, view, "resources/songLyrics.txt"); // TODO Take away file name from constructor. 
+		@SuppressWarnings("unused")
+		AnalyserController controller = new AnalyserController(model, view); // TODO Take away file name from constructor. 
 	}
 }
