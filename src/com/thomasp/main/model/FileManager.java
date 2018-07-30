@@ -15,9 +15,9 @@ public class FileManager {
 
 	public static String loadSongFileIntoString(String filePath) throws FileNotFoundException { // Read file and returns text in the file as a string. 
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(filePath));
-			StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
+			var br = new BufferedReader(new FileReader(filePath));
+			var sb = new StringBuilder();
+			var line = br.readLine();
 			
 			while(line != null) {
 				sb.append(line);
@@ -35,11 +35,11 @@ public class FileManager {
 	}
 	
 	public static LinkedHashMap<String, Boolean> loadProfanityFileIntoHashMap(String filePath){ // Should only be used by the swear word file. 
-		LinkedHashMap<String, Boolean> wordMap = new LinkedHashMap<String, Boolean>();
+		var wordMap = new LinkedHashMap<String, Boolean>();
 		
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(filePath));
-			String line = br.readLine();
+			var br = new BufferedReader(new FileReader(filePath));
+			var line = br.readLine();
 			
 			while(line != null) {
 				wordMap.put(line, true);
