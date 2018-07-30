@@ -12,7 +12,7 @@ public class AnalyserModel {
 	private ArrayList<String> wordArray;
 	
 	public AnalyserModel() {	
-		wordMap = FileManager.loadProfanityFileIntoHashMap("swearWords.txt"); // Loads pre-defined list of swear words. 
+		wordMap = FileManager.loadProfanityFileIntoHashMap("resources/swearWords.txt"); // Loads pre-defined list of swear words. 
 	}
 	
 	public void setFileText(String fileText) {
@@ -32,12 +32,12 @@ public class AnalyserModel {
 	}
 	
 	private void fileToArray(){ // Transfers all words from a file into an array. 
-		final int LAST_WORD_PADDING_REMOVE_CONSTANT = 2;
-		String regexFindPunctuation = "[,.!?\\\\-]";
+		final var LAST_WORD_PADDING_REMOVE_CONSTANT = 2;
+		var regexFindPunctuation = "[,.!?\\\\-]";
 		
 		wordArray = new ArrayList<String>();
 		
-		String tempString = "";
+		var tempString = "";
 		
 		for(int i = 0 ; i < fileText.length() ; i++) {
 			if(fileText.charAt(i) == ' ' || Character.toString(fileText.charAt(i)).matches(regexFindPunctuation)) {
