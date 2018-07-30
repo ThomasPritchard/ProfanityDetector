@@ -78,7 +78,6 @@ public class WindowView{
 		// Creating textfield.
 		middleText = new TextArea();
 		middleText.setFont(new Font(15));
-		middleText.setText("bobba");
 		BorderPane.setMargin(middleText, new Insets(12,12,50,12));
 		bPane.setCenter(middleText);
 		
@@ -159,7 +158,7 @@ public class WindowView{
 	// Console debugging tests.  
 	
 	public void printDetected() {
-		Debug.msg("Swear word detected"); // TODO Change to a view message. 
+		Debug.msg("Swear word detected"); 
 	}
 	
 	public void printNotDetected() {

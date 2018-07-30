@@ -38,7 +38,7 @@ public class AnalyserController {
 					var selectedFile = fileChooser.showOpenDialog(null);
 					
 					if(selectedFile != null) {	
-						fileText = FileManager.loadSongFileIntoString("resources/"+selectedFile.getName());
+						fileText = FileManager.loadSongFileIntoString(selectedFile.getAbsolutePath());
 					}
 					
 				}catch(FileNotFoundException e){

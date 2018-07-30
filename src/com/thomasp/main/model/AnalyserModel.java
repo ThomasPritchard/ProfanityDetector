@@ -20,7 +20,7 @@ public class AnalyserModel {
 	}
 	
 	public boolean compareFileWithMap() {
-		// TODO Check if word file and swear word file have been correctly initialised. Wait until GUI has been made. 
+		// TODO Check if swear word file have been correctly initialised. Wait until GUI has been made. 
 		fileToArray();
 		// Compare all words in array with the swear word hash map. 
 		for(int i = 0 ; i < wordArray.size() ; i++) {
