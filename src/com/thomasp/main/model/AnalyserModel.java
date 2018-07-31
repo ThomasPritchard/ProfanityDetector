@@ -3,6 +3,8 @@ package com.thomasp.main.model;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import org.junit.platform.commons.util.StringUtils;
+
 import com.thomasp.debug.Debug;
 
 public class AnalyserModel {
@@ -63,8 +65,22 @@ public class AnalyserModel {
 		// For the last word in the for loop that does not get added to the array. 
 		if(hasImportedFile) tempString = tempString.substring(0, tempString.length() - LAST_WORD_PADDING_REMOVE_CONSTANT);
 		else tempString = tempString.substring(0, tempString.length());
+		
 		wordArray.add(tempString);
+		removeBlankEntries();
 		Debug.msg(wordArray.toString());
+	}
+	
+	private void removeBlankEntries() {
+		for(int i = 0 ; i < wordArray.size() ; i++) {
+			if(StringUtils.isBlank(wordArray.get(i))){
+				wordArray.remove(wordArray.get(i));
+			}
+		}
+	}
+	
+	public ArrayList<String> getWordArray(){
+		return wordArray;
 	}
 	
 	public void setImportedFile(boolean hasImportedFile) {
