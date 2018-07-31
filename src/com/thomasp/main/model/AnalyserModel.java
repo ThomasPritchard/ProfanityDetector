@@ -19,8 +19,16 @@ public class AnalyserModel {
 		this.fileText = fileText;
 	}
 	
+	public boolean checkWordMapValidity() {
+		if(wordMap.isEmpty()) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
 	public boolean compareFileWithMap() {
-		// TODO Check if swear word file have been correctly initialised. Wait until GUI has been made. 
 		fileToArray();
 		// Compare all words in array with the swear word hash map. 
 		for(int i = 0 ; i < wordArray.size() ; i++) {

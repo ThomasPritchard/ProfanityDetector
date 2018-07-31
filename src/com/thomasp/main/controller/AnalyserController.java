@@ -24,8 +24,11 @@ public class AnalyserController {
 		this.view = view;
 		
 		createAnalyseHandler();
-		
 		createExitHandler();
+		
+		if(!model.checkWordMapValidity()) { // Checks if swear word file is there.
+			view.createErrorDialog("Swear Word File Not Found", "You must provide a valid swear word file in order to continue");
+		}
 	}
 
 	private void createAnalyseHandler() {
@@ -37,15 +40,34 @@ public class AnalyserController {
 					fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
 					var selectedFile = fileChooser.showOpenDialog(null);
 					
-					if(selectedFile != null) {	
+					// Checking for the right file extension. 
+					
+					var extension = "";
+					
+					int i = selectedFile.getAbsolutePath().lastIndexOf('.');
+					if(i > 0) {
+						extension = selectedFile.getAbsolutePath().substring(i+1);
+					}
+					
+					if(!(extension.equals("txt"))) {
+						view.createInformationDialog("Chosen File Incompatible", "Please try another file");
+						return;
+					} else if(selectedFile != null) {	
 						fileText = FileManager.loadSongFileIntoString(selectedFile.getAbsolutePath());
 					}
 					
 				}catch(FileNotFoundException e){
 					Debug.error("File not found"); 
-					System.exit(1);
+					view.createInformationDialog("Chosen Text File Not Found", "Please try again");
+					return;
 				}
-						
+				
+				// Checking if loaded file is valid.			
+				if(fileText == null) {
+					view.createInformationDialog("Chosen File Incompatible", "The file you are choosing is either incompatible or empty. Please try another file");
+					return;
+				}
+				
 				model.setFileText(fileText);
 				Debug.msg(fileText);
 				view.setText(fileText);

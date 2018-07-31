@@ -20,6 +20,6 @@ public class Test extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		WindowView view = new WindowView(model, primaryStage);
 		@SuppressWarnings("unused")
-		AnalyserController controller = new AnalyserController(model, view); // TODO Take away file name from constructor. 
+		AnalyserController controller = new AnalyserController(model, view);
 	}
 }

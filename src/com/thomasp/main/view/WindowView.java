@@ -1,6 +1,5 @@
 package com.thomasp.main.view;
 
-import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +12,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -158,13 +159,26 @@ public class WindowView{
 		analyseLyricsButton.setOnAction(analyseHandler);
 	}
 	
-	// Error handling
+	// Error handling dialogs here. 
 	
-	public void createErrorDialog(String errorMessage) {
-		
+	public void createErrorDialog(String headerText, String errorMessage) {
+		var alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Message");
+		alert.setHeaderText(headerText);
+		alert.setContentText(errorMessage);
+		alert.showAndWait();
+		System.exit(1);
 	}
 	
-	// Console debugging tests.  
+	public void createInformationDialog(String headerText, String infoMessage) {
+		var alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Message");
+		alert.setHeaderText(headerText);
+		alert.setContentText(infoMessage);
+		alert.showAndWait();
+	}
+	
+	// Console debugging tests here.  
 	
 	public void printDetected() {
 		Debug.msg("Swear word detected"); 
