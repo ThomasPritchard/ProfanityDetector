@@ -36,26 +36,32 @@ public class AnalyserController {
 			@Override
 			public void handle(ActionEvent event) { 
 				try {
-					var fileChooser = new FileChooser();
-					fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-					var selectedFile = fileChooser.showOpenDialog(null);
-					
-					// Checking for the right file extension. 
-					
-					var extension = "";
-					
-					int i = selectedFile.getAbsolutePath().lastIndexOf('.');
-					if(i > 0) {
-						extension = selectedFile.getAbsolutePath().substring(i+1);
+					if(view.getText() == null || view.getText().trim().isEmpty()) { // If there is no text present in the 'middle text' box, the user can search for a file to import. 
+						var fileChooser = new FileChooser();
+						fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+						var selectedFile = fileChooser.showOpenDialog(null);
+						
+						model.setImportedFile(true);
+						
+						// Checking for the right file extension. 
+						
+						var extension = "";
+						
+						int i = selectedFile.getAbsolutePath().lastIndexOf('.');
+						if(i > 0) {
+							extension = selectedFile.getAbsolutePath().substring(i+1);
+						}
+						
+						if(!(extension.equals("txt"))) {
+							view.createInformationDialog("Chosen File Incompatible", "Please try another file");
+							return;
+						} else if(selectedFile != null) {	
+							fileText = FileManager.loadSongFileIntoString(selectedFile.getAbsolutePath());
+						}
+					} else {
+						fileText = view.getText();
+						model.setImportedFile(false);
 					}
-					
-					if(!(extension.equals("txt"))) {
-						view.createInformationDialog("Chosen File Incompatible", "Please try another file");
-						return;
-					} else if(selectedFile != null) {	
-						fileText = FileManager.loadSongFileIntoString(selectedFile.getAbsolutePath());
-					}
-					
 				}catch(FileNotFoundException e){
 					Debug.error("File not found"); 
 					view.createInformationDialog("Chosen Text File Not Found", "Please try again");

@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -41,6 +42,7 @@ public class WindowView{
 			initialiseWindow(primaryStage);
 		} catch (FileNotFoundException e) {
 			Debug.error("Logo file not found");
+			createErrorDialog("Resource Files Not Found", "The resources files cannot be initialised. Make sure you have all correct files in your directory");
 		}
 	}
 	
@@ -57,8 +59,9 @@ public class WindowView{
 		var hBox = addHorizontalBox("-fx-background-color: #FFFFFF;");
 		
 		// Creating the logo.
-		var logo = new Image(new FileInputStream("resources/site_logo.png"));
-		
+		// TODO Get a file path depending on whether it is windows or mac. 
+		var getProgramFilesPath = System.getenv("ProgramFiles");
+		var logo = new Image(new FileInputStream(getProgramFilesPath+"/ProfanityDetector/site_logo.png"));
 		var imageView = new ImageView(logo);
 		imageView.setFitHeight(61);
 		imageView.setFitWidth(389);
@@ -101,8 +104,8 @@ public class WindowView{
 		
 		// Notifications text. 
 		notificationsText = new Text();
-		notificationsText.setText("Press 'Analyse Lyrics' to search for a file");
-		notificationsText.setFont(new Font(45));
+		notificationsText.setText("Type something in the text box then press 'Analyse Lyrics' or press the button and search for a file");
+		notificationsText.setFont(new Font(20));
 		
 		// Adding buttons to the hBox and adding the box to the pane. 
 		hBox2.getChildren().add(analyseLyricsButton);
@@ -147,6 +150,10 @@ public class WindowView{
 		middleText.setText(text);
 	}
 	
+	public String getText() {
+		return middleText.getText();
+	}
+	
 	// Configure all listeners here. 
 	
 	// Exit Listener.
@@ -166,6 +173,7 @@ public class WindowView{
 		alert.setTitle("Message");
 		alert.setHeaderText(headerText);
 		alert.setContentText(errorMessage);
+		alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 		alert.showAndWait();
 		System.exit(1);
 	}
@@ -175,6 +183,7 @@ public class WindowView{
 		alert.setTitle("Message");
 		alert.setHeaderText(headerText);
 		alert.setContentText(infoMessage);
+		alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 		alert.showAndWait();
 	}
 	

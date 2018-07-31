@@ -11,8 +11,11 @@ public class AnalyserModel {
 	private LinkedHashMap<String, Boolean> wordMap;
 	private ArrayList<String> wordArray;
 	
+	private boolean hasImportedFile;
+	
 	public AnalyserModel() {	
-		wordMap = FileManager.loadProfanityFileIntoHashMap("resources/swearWords.txt"); // Loads pre-defined list of swear words. 
+		var getProgramFilesPath = System.getenv("ProgramFiles");
+		wordMap = FileManager.loadProfanityFileIntoHashMap(getProgramFilesPath+"/ProfanityDetector/swearWords.txt"); // Loads pre-defined list of swear words. 
 	}
 	
 	public void setFileText(String fileText) {
@@ -39,7 +42,7 @@ public class AnalyserModel {
 		return false;
 	}
 	
-	private void fileToArray(){ // Transfers all words from a file into an array. 
+	private void fileToArray() { // Transfers all words from a file into an array. 
 		final var LAST_WORD_PADDING_REMOVE_CONSTANT = 2;
 		var regexFindPunctuation = "[,.!?\\\\-]";
 		
@@ -58,8 +61,13 @@ public class AnalyserModel {
 		}
 		
 		// For the last word in the for loop that does not get added to the array. 
-		tempString = tempString.substring(0, tempString.length() - LAST_WORD_PADDING_REMOVE_CONSTANT);
+		if(hasImportedFile) tempString = tempString.substring(0, tempString.length() - LAST_WORD_PADDING_REMOVE_CONSTANT);
+		else tempString = tempString.substring(0, tempString.length());
 		wordArray.add(tempString);
 		Debug.msg(wordArray.toString());
+	}
+	
+	public void setImportedFile(boolean hasImportedFile) {
+		this.hasImportedFile = hasImportedFile;
 	}
 }
