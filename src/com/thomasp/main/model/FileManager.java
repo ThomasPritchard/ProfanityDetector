@@ -29,7 +29,6 @@ public class FileManager {
 			br.close();
 		} catch (IOException e) {
 			Debug.error("IO error found");
-			System.exit(1);
 		} 
 		return fileString;
 	}
@@ -49,8 +48,7 @@ public class FileManager {
 			br.close();
 		} catch(IOException e) {
 			Debug.error("IO error found");
-			
-			System.exit(1);
+			return new LinkedHashMap<String, Boolean>(); // Empty Hash Map. 
 		}
 		return wordMap;
 	}
