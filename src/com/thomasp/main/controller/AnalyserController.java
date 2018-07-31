@@ -51,8 +51,10 @@ public class AnalyserController {
 				view.setText(fileText);
 				
 				if(model.compareFileWithMap()) {
+					view.setNotificationText("Swear Word Found");
 					view.printDetected();
 				}else {
+					view.setNotificationText("Swear Word Not Found");
 					view.printNotDetected();
 				}
 			}

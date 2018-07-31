@@ -32,6 +32,7 @@ public class WindowView{
 	private Button analyseLyricsButton;
 	private Stage primaryStage;
 	private TextArea middleText;
+	private Text notificationsText;
 	
 	public WindowView(AnalyserModel model, Stage primaryStage) {
 		this.model = model;		
@@ -58,20 +59,24 @@ public class WindowView{
 		var logo = new Image(new FileInputStream("resources/site_logo.png"));
 		
 		var imageView = new ImageView(logo);
-		configureImageView(imageView, screenSize);
-		
-		hBox.setAlignment(Pos.CENTER_LEFT);
-		
+		imageView.setFitHeight(61);
+		imageView.setFitWidth(389);
+		imageView.setPreserveRatio(true);
+			
 		// Adding the logo to the horizontal box.
 		hBox.getChildren().add(imageView);
 		
 		// Creating the title. 
 		var title = new Text();
-		setTitle(screenSize, title);
+		title.setFont(new Font("Anke", 45));
+		title.setText("JetStream Radio Profanity Detector");
+		title.setFill(Color.BLACK);
 		
 		// Adding title to the horizontal box. 
 		hBox.getChildren().add(title);
 		
+		hBox.setAlignment(Pos.CENTER_LEFT);
+			
 		// Adding box to the top of the window. 
 		bPane.setTop(hBox);
 		
@@ -93,9 +98,15 @@ public class WindowView{
 		quitButton.setPrefSize(200, 100);
 		quitButton.setFont(new Font(25));
 		
+		// Notifications text. 
+		notificationsText = new Text();
+		notificationsText.setText("Press 'Analyse Lyrics' to search for a file");
+		notificationsText.setFont(new Font(45));
+		
 		// Adding buttons to the hBox and adding the box to the pane. 
 		hBox2.getChildren().add(analyseLyricsButton);
 		hBox2.getChildren().add(quitButton);
+		hBox2.getChildren().add(notificationsText);
 		hBox2.setAlignment(Pos.CENTER);
 		BorderPane.setMargin(hBox2, new Insets(0,0,50,0));
 		bPane.setBottom(hBox2);
@@ -115,16 +126,8 @@ public class WindowView{
 		return hBox;
 	}
 	
-	private void configureImageView(ImageView imageView, Dimension screenSize) {		
-		imageView.setFitHeight(81);
-		imageView.setFitWidth(409);
-		imageView.setPreserveRatio(true);
-	}
-
-	private void setTitle(Dimension screenSize, Text title) {
-		title.setFont(new Font("Century Gothic", 45));
-		title.setText("JetStream Radio Profanity Detector");
-		title.setFill(Color.BLACK);
+	public void setNotificationText(String text) {
+		notificationsText.setText(text);
 	}
 	
 	private void configureStage(Stage primaryStage, Scene scene) {
@@ -153,6 +156,12 @@ public class WindowView{
 	// Analyser Listener.
 	public void setAnalyseListener(EventHandler<ActionEvent> analyseHandler) {
 		analyseLyricsButton.setOnAction(analyseHandler);
+	}
+	
+	// Error handling
+	
+	public void createErrorDialog(String errorMessage) {
+		
 	}
 	
 	// Console debugging tests.  

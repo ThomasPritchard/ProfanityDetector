@@ -49,6 +49,7 @@ public class FileManager {
 			br.close();
 		} catch(IOException e) {
 			Debug.error("IO error found");
+			
 			System.exit(1);
 		}
 		return wordMap;
